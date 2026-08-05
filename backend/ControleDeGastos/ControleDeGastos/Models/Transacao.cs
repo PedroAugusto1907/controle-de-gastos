@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace ControleDeGastos.Models;
+﻿namespace ControleDeGastos.Models;
 
 public class Transacao {
     public long Id { get; set; }
