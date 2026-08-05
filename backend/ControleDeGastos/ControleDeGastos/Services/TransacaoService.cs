@@ -21,7 +21,7 @@ public class TransacaoService : ITransacaoService {
                 Id = t.Id,
                 Descricao = t.Descricao,
                 Valor = t.Valor,
-                Tipo = t.Tipo,
+                Tipo = t.Tipo.ToString(),
                 PessoaId = t.PessoaId,
                 PessoaNome = t.Pessoa.Nome
             })
@@ -44,7 +44,7 @@ public class TransacaoService : ITransacaoService {
             Id = transacao.Id,
             Descricao = transacao.Descricao,
             Valor = transacao.Valor,
-            Tipo = transacao.Tipo,
+            Tipo = transacao.Tipo.ToString(),
             PessoaId = transacao.PessoaId,
             PessoaNome = pessoa.Nome
         };
