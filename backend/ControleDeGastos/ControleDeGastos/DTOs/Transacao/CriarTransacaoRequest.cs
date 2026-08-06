@@ -10,11 +10,13 @@ public class CriarTransacaoRequest {
 
     [Required(ErrorMessage = "O valor é obrigatório.")]
     [Range(0.01, double.MaxValue, ErrorMessage = "O valor deve ser maior que zero.")]
-    public decimal Valor { get; set; }
+    public decimal? Valor { get; set; }
 
     [Required(ErrorMessage = "O tipo é obrigatório.")]
-    public TipoTransacao Tipo { get; set; }
+    [EnumDataType(typeof(TipoTransacao), ErrorMessage = "Tipo de transação inválido.")]
+    public TipoTransacao? Tipo { get; set; }
 
     [Required(ErrorMessage = "A pessoa é obrigatória.")]
-    public long PessoaId { get; set; }
+    [Range(1, long.MaxValue, ErrorMessage = "O identificador da pessoa deve ser um valor positivo.")]
+    public long? PessoaId { get; set; }
 }

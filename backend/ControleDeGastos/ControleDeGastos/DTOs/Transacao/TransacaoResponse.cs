@@ -1,6 +1,4 @@
-﻿using ControleDeGastos.Models;
-
-namespace ControleDeGastos.DTOs.Transacao;
+﻿namespace ControleDeGastos.DTOs.Transacao;
 
 public class TransacaoResponse {
     public long Id { get; set; }
