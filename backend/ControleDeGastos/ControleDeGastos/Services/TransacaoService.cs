@@ -29,6 +29,9 @@ public class TransacaoService : ITransacaoService {
     }
 
     public async Task<TransacaoResponse> CriarAsync(CriarTransacaoRequest request) {
+        if (!Enum.IsDefined(typeof(TipoTransacao), request.Tipo))
+            throw new BusinessRuleException("Tipo de transação inválido.");
+        
         var pessoa = await _db.Pessoas.FindAsync(request.PessoaId) ?? throw new NotFoundException($"Pessoa com Id {request.PessoaId} não encontrada.");
 
         // Regra de negócio: pessoas menores de idade (< 18 anos) só podem ter despesas cadastradas
