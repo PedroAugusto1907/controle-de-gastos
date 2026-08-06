@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using ControleDeGastos.Attributes;
 using ControleDeGastos.Models;
 
 namespace ControleDeGastos.DTOs.Transacao;
@@ -13,8 +14,8 @@ public class CriarTransacaoRequest {
     public decimal? Valor { get; set; }
 
     [Required(ErrorMessage = "O tipo é obrigatório.")]
-    [EnumDataType(typeof(TipoTransacao), ErrorMessage = "Tipo de transação inválido.")]
-    public TipoTransacao? Tipo { get; set; }
+    [ValidEnumString(typeof(TipoTransacao))]
+    public string Tipo { get; set; } = string.Empty;
 
     [Required(ErrorMessage = "A pessoa é obrigatória.")]
     [Range(1, long.MaxValue, ErrorMessage = "O identificador da pessoa deve ser um valor positivo.")]

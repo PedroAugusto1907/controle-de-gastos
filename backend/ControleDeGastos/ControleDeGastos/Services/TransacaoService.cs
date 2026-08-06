@@ -21,7 +21,7 @@ public class TransacaoService : ITransacaoService {
                 Id = t.Id,
                 Descricao = t.Descricao,
                 Valor = t.Valor,
-                Tipo = t.Tipo.ToString(),
+                Tipo = t.Tipo,
                 PessoaId = t.PessoaId,
                 PessoaNome = t.Pessoa.Nome
             })
@@ -29,15 +29,14 @@ public class TransacaoService : ITransacaoService {
     }
 
     public async Task<TransacaoResponse> CriarAsync(CriarTransacaoRequest request) {
+        var tipo = Enum.Parse<TipoTransacao>(request.Tipo, true);
         var pessoa = await _db.Pessoas.FindAsync(request.PessoaId!.Value) ?? throw new NotFoundException($"Pessoa com Id {request.PessoaId} não encontrada.");
 
         // Regra de negócio: pessoas menores de idade (< 18 anos) só podem ter despesas cadastradas
-        if (pessoa.EhMenorDeIdade && request.Tipo == TipoTransacao.Receita)
+        if (pessoa.EhMenorDeIdade && tipo == TipoTransacao.Receita)
             throw new BusinessRuleException("Pessoas menores de idade só podem ter despesas cadastradas.");
 
-        var transacao = new Transacao {
-            Descricao = request.Descricao, Valor = request.Valor!.Value, Tipo = request.Tipo!.Value, PessoaId = request.PessoaId!.Value
-        };
+        var transacao = new Transacao { Descricao = request.Descricao, Valor = request.Valor!.Value, Tipo = tipo, PessoaId = request.PessoaId!.Value };
 
         _db.Transacoes.Add(transacao);
         await _db.SaveChangesAsync();
@@ -46,7 +45,7 @@ public class TransacaoService : ITransacaoService {
             Id = transacao.Id,
             Descricao = transacao.Descricao,
             Valor = transacao.Valor,
-            Tipo = transacao.Tipo.ToString(),
+            Tipo = tipo,
             PessoaId = transacao.PessoaId,
             PessoaNome = pessoa.Nome
         };
