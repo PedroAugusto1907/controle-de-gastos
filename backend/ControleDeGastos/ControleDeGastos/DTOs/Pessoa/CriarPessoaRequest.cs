@@ -9,5 +9,5 @@ public class CriarPessoaRequest {
 
     [Required(ErrorMessage = "A idade é obrigatória.")]
     [Range(0, 150, ErrorMessage = "A idade deve estar entre 0 e 150.")]
-    public int Idade { get; set; }
+    public int? Idade { get; set; }
 }

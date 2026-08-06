@@ -29,7 +29,7 @@ public class PessoaService : IPessoaService {
     }
 
     public async Task<PessoaResponse> CriarAsync(CriarPessoaRequest request) {
-        var pessoa = new Pessoa { Nome = request.Nome, Idade = request.Idade };
+        var pessoa = new Pessoa { Nome = request.Nome, Idade = request.Idade!.Value };
 
         _db.Pessoas.Add(pessoa);
         await _db.SaveChangesAsync();
