@@ -22,14 +22,18 @@ builder.Services.AddScoped<IRelatorioService, RelatorioService>();
 
 var app = builder.Build();
 
+// Roda automaticamente as migrations ao iniciar a aplicação
+using (var scope = app.Services.CreateScope()) {
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    db.Database.Migrate();
+}
+
 if (app.Environment.IsDevelopment()) {
     app.MapOpenApi();
     app.MapScalarApiReference();
 }
 
 app.UseExceptionHandler();
-
-app.UseAuthorization();
 
 app.MapControllers();
 
