@@ -16,7 +16,7 @@ public class ValidEnumStringAttribute : ValidationAttribute {
         if (value is not string texto || string.IsNullOrWhiteSpace(texto))
             return ValidationResult.Success;
 
-        if (Enum.TryParse(_enumType, texto, true, out _))
+        if (Enum.TryParse(_enumType, texto, true, out var resultado) && Enum.IsDefined(_enumType, resultado))
             return ValidationResult.Success;
 
         var valoresValidos = string.Join(", ", Enum.GetNames(_enumType));
