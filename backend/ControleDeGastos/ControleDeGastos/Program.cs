@@ -1,4 +1,3 @@
-using System.Text.Json.Serialization;
 using ControleDeGastos.Data;
 using ControleDeGastos.Middlewares;
 using ControleDeGastos.Services;
@@ -8,10 +7,7 @@ using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder
-    .Services.AddControllers()
-    .AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
-
+builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
 // Registra o DbContext utilizando SQLite
