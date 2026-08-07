@@ -3,3 +3,4 @@ obj/
 .idea/
 *.db*
 *.user
+node_modules
