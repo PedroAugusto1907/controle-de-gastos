@@ -1,17 +1,12 @@
-import { useEffect } from "react";
-import { apiClient } from "./api/client";
+import { PessoasSection } from "./components/pessoas/PessoasSection";
 
 function App() {
-  useEffect(() => {
-    apiClient
-      .get("/pessoas")
-      .then((response) => console.log("Conexão OK:", response.data))
-      .catch((error) => console.error("Erro de conexão:", error));
-  }, []);
-
   return (
-    <div>
-      <h1>Controle de Gastos Residenciais</h1>
+    <div className="max-w-4xl mx-auto p-6">
+      <h1 className="text-2xl font-bold mb-6">
+        Controle de Gastos Residenciais
+      </h1>
+      <PessoasSection />
     </div>
   );
 }
