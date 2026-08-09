@@ -44,6 +44,7 @@ public class RelatorioService : IRelatorioService {
             Nome = pessoa.Nome,
             TotalReceitas = totalReceitas,
             TotalDespesas = totalDespesas,
+            // Saldo = Receitas - Despesas (conforme especificação)
             Saldo = totalReceitas - totalDespesas
         };
     }

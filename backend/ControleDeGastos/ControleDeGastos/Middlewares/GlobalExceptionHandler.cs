@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ControleDeGastos.Middlewares;
 
+// Centraliza o tratamento de exceções da API
 public sealed class GlobalExceptionHandler : IExceptionHandler {
     private readonly ILogger<GlobalExceptionHandler> _logger;
 

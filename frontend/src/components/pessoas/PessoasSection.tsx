@@ -18,6 +18,7 @@ export function PessoasSection({
   aoDeletar,
 }: PessoasSectionProps) {
   async function handleDeletar(id: number) {
+    // Avisa sobre o cascade delete (backend remove as transações da pessoa)
     const confirmar = window.confirm(
       "Remover esta pessoa também apagará todas as suas transações. Confirma?",
     );

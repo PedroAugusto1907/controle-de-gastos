@@ -18,6 +18,7 @@ public class PessoaConfiguration : IEntityTypeConfiguration<Pessoa> {
             .Property(p => p.Idade)
             .IsRequired();
 
+        // Propriedade calculada (não mapeada no banco, apenas derivada de Idade)
         builder.Ignore(p => p.EhMenorDeIdade);
     }
 }

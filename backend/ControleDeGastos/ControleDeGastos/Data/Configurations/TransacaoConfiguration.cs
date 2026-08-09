@@ -28,6 +28,7 @@ public class TransacaoConfiguration : IEntityTypeConfiguration<Transacao> {
             .WithMany(p => p.Transacoes)
             .HasForeignKey(t => t.PessoaId)
             .IsRequired()
+            // Cascade: ao deletar uma Pessoa, todas as suas Transacoes são removidas automaticamente
             .OnDelete(DeleteBehavior.Cascade);
     }
 }
