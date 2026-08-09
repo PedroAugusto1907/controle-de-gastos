@@ -26,6 +26,6 @@ public class TransacoesController : ControllerBase {
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<TransacaoResponse>> Criar(CriarTransacaoRequest request) {
         var transacao = await _service.CriarAsync(request);
-        return CreatedAtAction(nameof(Listar), new { id = transacao.Id }, transacao);
+        return StatusCode(StatusCodes.Status201Created, transacao);
     }
 }

@@ -20,14 +20,6 @@ public class PessoaService : IPessoaService {
             .ToListAsync();
     }
 
-    public async Task<PessoaResponse> ObterPorIdAsync(long id) {
-        var pessoa = await _db
-            .Pessoas.AsNoTracking()
-            .FirstOrDefaultAsync(p => p.Id == id) ?? throw new NotFoundException($"Pessoa com Id {id} não encontrada.");
-
-        return new PessoaResponse { Id = pessoa.Id, Nome = pessoa.Nome, Idade = pessoa.Idade, EhMenorDeIdade = pessoa.EhMenorDeIdade };
-    }
-
     public async Task<PessoaResponse> CriarAsync(CriarPessoaRequest request) {
         var pessoa = new Pessoa { Nome = request.Nome, Idade = request.Idade!.Value };
 
