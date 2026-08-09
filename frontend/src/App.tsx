@@ -9,6 +9,7 @@ function App() {
     transacoes,
     relatorio,
     carregando,
+    erros,
     criarPessoa,
     deletarPessoa,
     criarTransacao,
@@ -18,18 +19,26 @@ function App() {
     <div className="max-w-4xl mx-auto p-6 space-y-10">
       <h1 className="text-2xl font-bold">Controle de Gastos Residenciais</h1>
 
+      {erros.dados && (
+        <p className="rounded border border-red-200 bg-red-50 p-2 text-red-600">
+          {erros.dados}
+        </p>
+      )}
+
       <PessoasSection
         pessoas={pessoas}
         carregando={carregando}
-        onCreate={criarPessoa}
-        onDelete={deletarPessoa}
+        erro={erros.pessoa}
+        aoCriar={criarPessoa}
+        aoDeletar={deletarPessoa}
       />
 
       <TransacoesSection
         transacoes={transacoes}
         pessoas={pessoas}
         carregando={carregando}
-        onCreate={criarTransacao}
+        erro={erros.transacao}
+        aoCriar={criarTransacao}
       />
 
       <RelatoriosSection relatorio={relatorio} carregando={carregando} />

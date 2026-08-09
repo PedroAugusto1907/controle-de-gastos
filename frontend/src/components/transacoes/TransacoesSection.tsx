@@ -1,7 +1,5 @@
-import { useState } from "react";
 import type { Transacao, CriarTransacaoRequest } from "../../types/transacao";
 import type { Pessoa } from "../../types/pessoa";
-import { extrairMensagemDeErro } from "../../api/errors";
 import { ListaTransacoes } from "./ListaTransacoes";
 import { FormTransacao } from "./FormTransacao";
 
@@ -9,27 +7,17 @@ interface TransacoesSectionProps {
   transacoes: Transacao[];
   pessoas: Pessoa[];
   carregando: boolean;
-  onCreate: (dados: CriarTransacaoRequest) => Promise<void>;
+  erro: string | null;
+  aoCriar: (dados: CriarTransacaoRequest) => Promise<void>;
 }
 
 export function TransacoesSection({
   transacoes,
   pessoas,
   carregando,
-  onCreate,
+  erro,
+  aoCriar,
 }: TransacoesSectionProps) {
-  const [erro, setErro] = useState<string | null>(null);
-
-  async function handleCriar(dados: CriarTransacaoRequest) {
-    setErro(null);
-
-    try {
-      await onCreate(dados);
-    } catch (erro) {
-      setErro(extrairMensagemDeErro(erro));
-    }
-  }
-
   return (
     <section>
       <h2 className="text-xl font-semibold text-gray-900">Transações</h2>
@@ -39,7 +27,7 @@ export function TransacoesSection({
           Cadastre ao menos uma pessoa antes de lançar transações.
         </p>
       ) : (
-        <FormTransacao pessoas={pessoas} aoCriar={handleCriar} />
+        <FormTransacao pessoas={pessoas} aoCriar={aoCriar} />
       )}
 
       {erro && (
